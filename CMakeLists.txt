@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.30)
 
-project(cppCowOverlay C CXX)
+project(template_project C CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_C_STANDARD 23)
 
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     add_compile_definitions(DEBUG=1)
-    add_compile_definitions(VERBOSE=0)
+    add_compile_definitions(VERBOSE=1)
     set(OPTIMIZERS
             -O0 -g3 -fsanitize=address -fsanitize=undefined -lubsan -lasan)
     add_compile_options(${OPTIMIZERS})
@@ -61,16 +61,11 @@ add_compile_definitions(
 )
 
 include_directories(src/include)
-add_executable(cppCowOverlay            src/main.cpp
+add_executable(template_main_executable
+        src/main.cpp
         src/debug/log.cpp               src/include/log.hpp
         src/debug/color.cpp             src/include/color.h
         src/debug/error.cpp             src/include/error.h
         src/debug/execute_command.cpp   src/include/execute_command.h
-        src/utils/lz4.c                 src/include/lz4.h
-        src/utils/configuration.cpp     src/include/configuration.h
-        src/utils/rstring.cpp
-        src/include/rstring.h
-        src/include/layer_info.h
-        src/blocks/block.cpp
-        src/include/block.h
+        src/utils/rstring.cpp           src/include/rstring.h
 )
